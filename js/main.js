@@ -62,8 +62,27 @@ function actualizarCarritoUI(){
     
 }
 
-const botones = document.querySelectorAll('button');
+const botones = document.querySelectorAll('.btn-add');
+
+ botones.forEach(boton =>{
+    const id = boton.parentElement.parentElement.children[0].value;
+
+    boton.addEventListener('click', e =>{
+        addItemToCarrito(id);
+    });
+ });
 
 function removeItemFromCarrito(id){
+
+}
+
+function addItemToCarrito(id){
+    fetch('http://localhost/carritoPcero/api/carrito/api-carrito.php?action=add&id='+id)
+    .then(res => res.json())
+    .then(response => { 
+        console.log(response.status);
+        actualizarCarritoUI();
+
+    });
 
 }
