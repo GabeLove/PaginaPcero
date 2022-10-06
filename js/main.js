@@ -1,5 +1,19 @@
 document.addEventListener('DOMContentLoaded',event=> {
-    //COOKIES
+    //cookies
+    const cookies = document.cookie.split(';');
+    let cookie = null;
+
+    cookies.forEach(item =>{
+        if(item.indexOf('items') > -1){
+            cookie = item;
+        }
+    });
+    
+    if(cookie != null){
+        const count  = cookie.split('=')[1];
+        console.log(count);
+        document.querySelector('.btn-carrito').innerHTML = `(${count}) Carrito`;
+    }
 
 });
 
@@ -29,7 +43,7 @@ function actualizarCarritoUI(){
         let html = '';
 
         response.items.forEach(element =>{
-            html=`
+            html +=`
             <div class='fila'>
                 <div class='imagen'></div>
                     <img src='img/${element.imagen}' width='100'/>
@@ -73,7 +87,13 @@ const botones = document.querySelectorAll('.btn-add');
  });
 
 function removeItemFromCarrito(id){
+    fetch('http://localhost/carritoPcero/api/carrito/api-carrito.php?action=remove&id='+id)
+    .then(res => res.json())
+    .then(response => { 
+        console.log(response.status);
+        actualizarCarritoUI();
 
+    });
 }
 
 function addItemToCarrito(id){
