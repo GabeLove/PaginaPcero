@@ -2,6 +2,7 @@
         <ul>
             <li><a href="index.php">Juguetes</a></li>
             <li><a href="libros.php">Libros</a></li>
+            <li><button>Oscuro</button></li>
             <li class="carrito">
                 <a href="#" class='btn-carrito'>Carrito</a>
                 <div id="carrito-container" >
